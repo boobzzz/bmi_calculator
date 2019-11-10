@@ -7,12 +7,11 @@ export default class Calculator extends Component {
         height: 160,
         weight: 80,
         bmi: 0,
-        category: ''
     }
 
     setParams = (event) => {
         let name = event.target.name
-        let { height, weight, bmi } = this.state
+        let { height, weight } = this.state
 
         this.setState({
             [name]: event.target.value
@@ -20,18 +19,17 @@ export default class Calculator extends Component {
         this.setState({
             bmi: (weight / (height / 100) ** 2).toFixed(2)
         })
-        this.setState({
-            category:
-                (bmi > 0 && bmi <= 16) ? 'Severely underweight' :
-                (bmi > 16 && bmi <= 18.5) ? 'Underweight' :
-                (bmi > 18.5 && bmi <= 25) ? 'Normal (healthy weight)' :
-                (bmi > 25 && bmi <= 30) ? 'Overweight' :
-                (bmi > 30 && bmi <= 220) ? 'Obese' : null
-        })
     }
 
+
     render() {
-        let { height, weight, bmi, category } = this.state;
+        let { height, weight, bmi } = this.state;
+        let category =
+            (this.state.bmi > 0 && this.state.bmi <= 16) ? 'Severely underweight' :
+            (this.state.bmi > 16 && this.state.bmi <= 18.5) ? 'Underweight' :
+            (this.state.bmi > 18.5 && this.state.bmi <= 25) ? 'Normal (healthy weight)' :
+            (this.state.bmi > 25 && this.state.bmi <= 30) ? 'Overweight' :
+            (this.state.bmi > 30 && this.state.bmi <= 220) ? 'Obese' : null
 
         return (
             <div>
