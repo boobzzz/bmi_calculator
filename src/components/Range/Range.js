@@ -11,7 +11,7 @@ const Range = (props) => (
             {' '}
             <span>{props.max}</span>
             {' '}
-            <span>{props.value}</span>
+            <span><b>{props.value}{props.uom}</b></span>
         </label>
     </form>
 )

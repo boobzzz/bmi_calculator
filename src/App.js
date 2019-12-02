@@ -39,19 +39,21 @@ export default class Calculator extends Component {
                 <Range
                     name="height"
                     title="Height:"
+                    uom="cm"
                     min="90" max="250"
                     value={height}
                     onChange={this.setParams} />
                 <Range
                     name="weight"
                     title="Weight:"
+                    uom="kg"
                     min="35" max="220"
                     value={weight}
                     onChange={this.setParams} />
                 <br/>
-                <span>BMI: {bodyMassIndex}</span>
+                <span>BMI: <b>{bodyMassIndex}</b></span>
                 {' '}
-                <span>{categorized}</span>
+                <span><b>{categorized}</b></span>
             </div>
         )
     }
