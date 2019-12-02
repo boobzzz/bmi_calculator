@@ -38,15 +38,13 @@ export default class Calculator extends Component {
             <div>
                 <Range
                     name="height"
-                    title="Height:"
-                    uom="cm"
+                    title="Height:" uom="cm"
                     min="90" max="250"
                     value={height}
                     onChange={this.setParams} />
                 <Range
                     name="weight"
-                    title="Weight:"
-                    uom="kg"
+                    title="Weight:" uom="kg"
                     min="35" max="220"
                     value={weight}
                     onChange={this.setParams} />
