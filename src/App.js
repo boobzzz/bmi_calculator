@@ -6,30 +6,33 @@ export default class Calculator extends Component {
     state = {
         height: 160,
         weight: 80,
-        bmi: 0,
     }
 
     setParams = (event) => {
         let name = event.target.name
-        let { height, weight } = this.state
 
         this.setState({
             [name]: event.target.value
         })
-        this.setState({
-            bmi: (weight / (height / 100) ** 2).toFixed(2)
-        })
+    }
+
+    bmi(h, w) {
+        return (w / (h / 100) ** 2).toFixed(2)
+    }
+
+    category(b) {
+        if (b > 0 && b <= 16) return 'Severely underweight'
+        if (b > 16 && b <= 18.5) return 'Underweight'
+        if (b > 18.5 && b <= 25) return 'Normal (healthy weight)'
+        if (b > 25 && b <= 30) return 'Overweight'
+        if (b > 30 && b <= 220) return 'Obese'
     }
 
 
     render() {
-        let { height, weight, bmi } = this.state;
-        let category =
-            (this.state.bmi > 0 && this.state.bmi <= 16) ? 'Severely underweight' :
-            (this.state.bmi > 16 && this.state.bmi <= 18.5) ? 'Underweight' :
-            (this.state.bmi > 18.5 && this.state.bmi <= 25) ? 'Normal (healthy weight)' :
-            (this.state.bmi > 25 && this.state.bmi <= 30) ? 'Overweight' :
-            (this.state.bmi > 30 && this.state.bmi <= 220) ? 'Obese' : null
+        let { height, weight } = this.state;
+        let bodyMassIndex = this.bmi(height, weight);
+        let categorized = this.category(bodyMassIndex);
 
         return (
             <div>
@@ -46,9 +49,9 @@ export default class Calculator extends Component {
                     value={weight}
                     onChange={this.setParams} />
                 <br/>
-                <span>BMI: {bmi}</span>
+                <span>BMI: {bodyMassIndex}</span>
                 {' '}
-                <span>{category}</span>
+                <span>{categorized}</span>
             </div>
         )
     }
