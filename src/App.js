@@ -2,6 +2,14 @@ import React, { Component } from 'react';
 
 import Range from './components/Range/Range';
 
+function category(b) {
+    if (b > 0 && b <= 16) return 'Severely underweight'
+    if (b > 16 && b <= 18.5) return 'Underweight'
+    if (b > 18.5 && b <= 25) return 'Normal (healthy weight)'
+    if (b > 25 && b <= 30) return 'Overweight'
+    if (b > 30 && b <= 220) return 'Obese'
+}
+
 export default class Calculator extends Component {
     state = {
         height: 160,
@@ -9,7 +17,7 @@ export default class Calculator extends Component {
     }
 
     setParams = (event) => {
-        let name = event.target.name
+        let { name } = event.target;
 
         this.setState({
             [name]: event.target.value
@@ -20,19 +28,10 @@ export default class Calculator extends Component {
         return (w / (h / 100) ** 2).toFixed(2)
     }
 
-    category(b) {
-        if (b > 0 && b <= 16) return 'Severely underweight'
-        if (b > 16 && b <= 18.5) return 'Underweight'
-        if (b > 18.5 && b <= 25) return 'Normal (healthy weight)'
-        if (b > 25 && b <= 30) return 'Overweight'
-        if (b > 30 && b <= 220) return 'Obese'
-    }
-
-
     render() {
         let { height, weight } = this.state;
         let bodyMassIndex = this.bmi(height, weight);
-        let categorized = this.category(bodyMassIndex);
+        let categorized = category(bodyMassIndex);
 
         return (
             <div>
